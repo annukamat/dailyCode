@@ -114,10 +114,6 @@ public class l001basic {
 
                 size++;
             }
-
-            
-
-
         }
 
         public void removeLast(){
@@ -199,6 +195,114 @@ public class l001basic {
             tail = temp;
         }
 
+        public int kthFromLast(int k){
+            Node fast = head, slow = head;
+
+            for(int i=0; i<k; i++){
+                fast = fast.next;
+            }
+            while(fast != tail){
+                fast = fast.next;
+                slow = slow.next;
+            }
+            return slow.data;
+        }
+
+        public int mid(){
+            Node slow=head, fast=head;
+
+            while(fast!=null || fast.next.next!=null){
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+            return slow.data;
+        }
+
+        public LinkedList mergeTwoSortedLists(LinkedList l1, LinkedList l2){
+            Node c1 = l1.head;
+            Node c2 = l2.head;
+            LinkedList dummy = new LinkedList();
+
+            while (c1!=null && c2!=null){
+                if(c1.data < c2.data){
+                    dummy.addLast(c1.data);
+                    c1=c1.next;
+                }else{
+                    dummy.addLast(c2.data);
+                    c2=c2.next;
+                }
+            }
+
+            while(c1!=null){
+                dummy.addLast(c1.data);
+                c1=c1.next;
+            }
+            while(c2!=null){
+                dummy.addLast(c2.data);
+                c2=c2.next;
+            }
+            return dummy;
+        }
+
+        // merge sort of a linked list:
+        public Node midNode(Node head, Node tail){
+            Node f = head, s = head;
+
+            while(f != tail && f.next != tail){
+                f = f.next.next;
+                s = s.next;
+            }
+            return s;
+        }
+        public LinkedList mergeSort(Node head, Node tail){
+            if(head == tail){
+                LinkedList bl = new LinkedList();
+                bl.addLast(head.data);
+                return bl;
+            }
+            Node mid = midNode(head, tail);
+            LinkedList one = mergeSort(head, mid);
+            LinkedList two = mergeSort(mid.next, tail);
+
+            return mergeTwoSortedLists(one, two);
+        }
+
+        // remove duplicates in a sorted linked list
+        public void removeDuplicates(){
+            LinkedList res = new LinkedList();
+
+            while(this.size() > 0){
+                int val = this.getFirst();
+                this.removeFirst();
+
+                if(res.size()==0 || val!=res.tail.data){
+                    res.addLast(val);
+                }
+            }
+            this.head = res.head;
+            this.tail = res.tail;
+            this.size = res.size;
+        }
+
+        public int length(LinkedList node){
+            Node cur = head;
+            int len = 0;
+            while(cur != null){
+                cur = cur.next;
+                len++;
+            }
+            return len;
+        }
+
+        public void kReverse(int k){
+            Node oh = null, ot = null, th = null, tt = null;
+            Node cur = head;
+
+            int len = size;
+            while(cur != null){
+
+            }
+        }
 
     }
 
